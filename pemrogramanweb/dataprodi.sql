@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2021 at 03:48 AM
+-- Generation Time: Dec 22, 2021 at 07:47 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- PHP Version: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,10 +38,10 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`id_buku`, `judul_buku`, `deskripsi`) VALUES
-(1, 'Gajah Mada', 'Sistem Politik dan Kepemimpinan'),
-(5, 'Ken Arok', 'Perebutan Puncak Tahta Kekuasaan'),
-(6, 'Majapahit', 'Dari Kejayaan Hingga Keruntuhan'),
-(7, 'Singasari', 'Dibalik Pesona dan Sisi Kelam Singasari');
+(1, 'Organisasi', 'Kepemimpinan Manajement dan Organisai'),
+(3, 'Pele', 'Sepak Bola'),
+(6, 'Bantengan', 'Bantengan Nuswantoro'),
+(9, 'Syech Subakir', 'Legenda Agama Islam Ditanah Jawa');
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,14 @@ INSERT INTO `detail_peminjaman_buku` (`id_detail_peminjaman_buku`, `id_peminjama
 (9, 13, 1, 1),
 (10, 14, 1, 1),
 (12, 16, 1, 1),
-(13, 17, 1, 1);
+(13, 17, 1, 1),
+(14, 18, 1, 1),
+(15, 19, 1, 1),
+(16, 20, 1, 1),
+(17, 21, 1, 1),
+(18, 22, 1, 1),
+(19, 22, 1, 1),
+(20, 23, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -91,12 +98,13 @@ CREATE TABLE `jurusan` (
 --
 
 INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`, `angkatan`) VALUES
-(1, 'Sistem Informasi', 2020),
+(1, 'Sistem Informasi', 2021),
 (2, 'Teknik Elektro', 2020),
 (3, 'Ilmu Komunikasi', 2020),
-(4, 'Bahasa Inggris', 2020),
+(4, 'Bahasa Inggris', 2021),
 (5, 'Akuntansi', 2020),
-(6, 'Ekonomi', 2020);
+(6, 'Ekonomi', 2020),
+(7, 'Teknik Elektro', 2021);
 
 -- --------------------------------------------------------
 
@@ -120,10 +128,9 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id_mhs`, `nama`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `username`, `password`, `id_jurusan`) VALUES
-(2, 'Ainaini Azzahra', '2001-12-13', 'P', 'Desa Belung', 'Azzahra', 'Azzahra', 1),
-(3, 'Sari', '2000-10-12', 'P', 'Malang', 'sari', 'sari', 5),
-(4, 'Angkasa Jaya', '2000-07-05', 'L', 'Kota Malang', 'Jaya', 'Jaya', 2),
-(6, 'Rangga ', '2002-07-09', 'L', 'Malang', 'Rangga', 'Rangga', 4);
+(2, 'Dimas Pandu', '2002-10-29', 'L', 'Dusun Meduran', 'Dimas', 'Dimas', 1),
+(4, 'Puspita Sari', '2000-11-07', 'P', 'Kota Batu', 'Puspita', 'Puspita', 3),
+(8, 'Dewi', '2001-07-22', 'P', 'Karang Ploso', 'Dewi', 'Dewi', 4);
 
 -- --------------------------------------------------------
 
@@ -143,10 +150,6 @@ CREATE TABLE `peminjaman_buku` (
 --
 
 INSERT INTO `peminjaman_buku` (`id_peminjaman_buku`, `tanggal_pinjam`, `id_mhs`, `tanggal_kembali`) VALUES
-(1, '2021-12-06', 2, '2021-12-11'),
-(2, '2021-12-06', 2, '2021-12-11'),
-(3, '2021-12-06', 2, '2021-12-11'),
-(4, '2021-12-06', 2, '2021-12-11'),
 (5, '2021-12-06', 2, '2021-12-11'),
 (6, '2021-12-06', 2, '2021-12-11'),
 (7, '2021-12-06', 2, '2021-12-11'),
@@ -159,7 +162,13 @@ INSERT INTO `peminjaman_buku` (`id_peminjaman_buku`, `tanggal_pinjam`, `id_mhs`,
 (14, '2021-12-13', 2, '2021-12-18'),
 (15, '2021-12-13', 2, '2021-12-18'),
 (16, '2021-12-13', 2, '2021-12-18'),
-(17, '2021-12-13', 2, '2021-12-18');
+(17, '2021-12-13', 2, '2021-12-18'),
+(18, '2021-12-22', 4, '0000-00-00'),
+(19, '2021-12-22', 4, '0000-00-00'),
+(20, '2021-12-22', 4, '0000-00-00'),
+(21, '2021-12-22', 2, '0000-00-00'),
+(22, '2021-12-22', 2, '0000-00-00'),
+(23, '2021-12-22', 8, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -173,6 +182,27 @@ CREATE TABLE `pengembalian_buku` (
   `tanggal_pengembalian` date NOT NULL,
   `denda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pengembalian_buku`
+--
+
+INSERT INTO `pengembalian_buku` (`id_pengembalianbuku`, `id_peminjaman_buku`, `tanggal_pengembalian`, `denda`) VALUES
+(1, 21, '2021-12-22', 110000),
+(2, 21, '2021-12-22', 110000),
+(3, 21, '2021-12-22', 110000),
+(4, 21, '2021-12-22', 110000),
+(5, 5, '2021-12-22', 55000),
+(6, 6, '2021-12-22', 55000),
+(7, 6, '2021-12-22', 55000),
+(8, 6, '2021-12-22', 55000),
+(9, 6, '2021-12-22', 55000),
+(10, 6, '2021-12-22', 55000),
+(11, 7, '2021-12-22', 55000),
+(12, 8, '2021-12-22', 55000),
+(13, 15, '2021-12-22', 20000),
+(14, 12, '2021-12-22', 20000),
+(15, 22, '2021-12-22', 110000);
 
 --
 -- Indexes for dumped tables
@@ -227,37 +257,37 @@ ALTER TABLE `pengembalian_buku`
 -- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_buku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `detail_peminjaman_buku`
 --
 ALTER TABLE `detail_peminjaman_buku`
-  MODIFY `id_detail_peminjaman_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_detail_peminjaman_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `jurusan`
 --
 ALTER TABLE `jurusan`
-  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `peminjaman_buku`
 --
 ALTER TABLE `peminjaman_buku`
-  MODIFY `id_peminjaman_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_peminjaman_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  MODIFY `id_pengembalianbuku` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengembalianbuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
